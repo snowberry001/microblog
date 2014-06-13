@@ -1,0 +1,80 @@
+﻿<script src="/mods/like.js"></script>
+<style type="text/css">
+small {white-space: pre;}
+#form_reply{margin: 0px;}
+.commentlist .comment{
+       list-style:none;
+       border-bottom:1px solid #E2E2E2;
+       background:#FFF;
+       overflow:visible;
+       padding:5px;
+}
+</style>
+<% posts.forEach(function(post, index1) { %>
+<div class="row" >
+<div class="span10" >    
+     <big><a href="/u/<%= post.username %>"><%= post.username %></a></big>：<%- post.post %>   
+     <p></p>
+     <p><small><%= post.time %>    <a style="cursor:pointer" id="btn_comment"  onclick="$('#commentlist<%= index1 %>').slideToggle();"><img src="/img/comment.gif" /> 回复(<%= comment_num[post_ids[index1]] %>)</a></small><small>   |   </small><small><a style="cursor:pointer" class="ilike" id=<%= post_ids[index1] %> number=<%= like_num[post_ids[index1]] %> ><img src="/img/good.gif" /> 喜欢(<%= like_num[post_ids[index1]] %>)</a></small><small>   |   </small><small><a href="javascript:void(0)" onclick="$('#form_reply<%= index1 %>').slideToggle();">评论</a></small></p> 
+     <div>
+        <!-- Baidu Button BEGIN -->
+	<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+	<span class="bds_more">分享到：</span>
+	<a class="bds_qzone"></a>
+	<a class="bds_tsina"></a>
+	<a class="bds_tqq"></a>
+	<a class="bds_renren"></a>
+	<a class="bds_t163"></a>
+	</div>
+	<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+	<script type="text/javascript" id="bdshell_js"></script>
+	<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+	</script>
+	<!-- Baidu Button END -->
+     </div>
+     &nbsp;
+     <div style="margin-top: 10px">
+     <ol class="commentlist" id="commentlist<%= index1 %>" style="width: 550px; display: none" >
+     <% comments.forEach(function(comment, index) { %>
+     <%  if (comment.post_id == post_ids[index1]){ %>
+          <li class="comment clearfix" onmouseover="this.style.background = 'RGB(240,240,240)';" onmouseout="this.style.background = 'white';">
+	  <div class="reply-content" >
+	  <div class="text">
+	  <p style="white-space: pre-line"><a href="/u/<%= comment.username %>"><%= comment.username %></a> ：</p>
+	  <p><%- comment.content %></p>
+          <p><small><%= comment.time %>&nbsp &nbsp &nbsp &nbsp<a style="cursor:pointer"  >回复</a></small></p>
+	  </div>
+	  </div></li>
+     <% }}) %>
+     </ol>
+     </div>
+
+     <form id="form_reply<%= index1 %>" style="text-align: center; display: none" action="/reply" method="post">
+          <textarea id="editor-<%= index1 %>" name="reply" style="width:550px; height:200px;" ></textarea>
+	  <input type="text" class="span4" name="post_id" value=<%= post_ids[index1] %> style="display: none" >
+          <button type="submit" class="btn btn-success" id="reply" style="float: left; margin-top: 5px;">回复</button>
+     </form>
+
+</div>
+</div>
+<hr></hr>
+<% }) %>
+<script charset="utf-8" src="/editor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/editor/lang/zh_CN.js"></script>
+<script>
+        KindEditor.ready(function(K) {
+	        var editors = $('textarea[name="reply"]');
+		for (var index = 0; index < editors.length; index ++){
+                   var editor_id = editors[index].id;
+		   K.create('#'+editor_id, {width: '550px', minWidth: '550px', filterMode: false, items: 
+		      [
+			'preview', '|', 'emoticons', 'bold', 'italic', 'forecolor', 'hilitecolor', '|', 'source', 'clearhtml', '|',
+			'image', 'code', 'insertorderedlist', 'insertunorderedlist', 'link', '|', 'selectall', 'undo', 'redo', '|', 
+                      ]
+		   });
+		}
+	});
+</script>
+
+

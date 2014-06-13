@@ -1,0 +1,67 @@
+<% include header %>
+<script type="text/javascript" src="javascripts/swfobject.js"></script>
+<script type="text/javascript" src="javascripts/jquery.Jcrop.js"></script>
+<script src="/mods/update.js"></script>
+<link rel='stylesheet' href='/stylesheets/jquery.Jcrop.css' />
+<div>
+<legend>用户信息编辑</legend>
+<form id="signupForm" class="form-horizontal" method="post">
+  <fieldset>
+    <div class="control-group">
+      <label class="control-label" for="nickname">昵称</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge" id="nickname" name="nickname" placeholder="你的昵称..." value=<%= infor.nickname %>>
+        <p class="help-block">昵称用于在个人主页用户信息栏中显示。</p>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="sign">个性签名</label>
+      <div class="controls">
+        <textarea rows="3" class="input-xlarge" id="sign" name="sign" placeholder="说点什么吧，让大家更加了解你..." ><%= infor.sign %></textarea>
+	<input type="button" class="btn btn-primary" id="btn_update"  value="更 新">
+      </div>
+    </div>
+  </fieldset>
+</form>
+</div>
+
+<div>
+<legend>用户头像修改</legend>
+<form id="avatarUpload" class="form-horizontal" action="/update/upload" method="post">
+ <div class="control-group">
+   <div class="controls">
+      <p>当前头像：</p>
+      <% if(infor.avatar) { %>
+      <img id="J_current" src=<%= infor.avatar %> class="img-polaroid" />
+      <% } else { %>
+      <img id="J_current" src="/img/default.jpg" class="img-polaroid" />
+      <% } %>
+   </div>
+ </div>
+ <div class="control-group">
+   <div class="controls">
+    <p>预览头像：</p>
+    <% if(infor.avatar) { %>
+       <img id="J_preview" class="img-polaroid" src=<%= infor.avatar %> />
+       <img id="J_small" class="img-polaroid" src=<%= infor.avatar %> style="width: 48px; height: 54px; margin-left: 30px; margin-top: 0px; "/>
+    <% } else { %>
+       <img id="J_preview" class="img-polaroid" src="/img/default.jpg" />
+       <img id="J_small" class="img-polaroid" src="/img/default.jpg" style="width: 48px; height: 54px; margin-left: 30px; margin-top: 0px; "/>
+    <% } %>
+   </div>
+ </div>
+ <div class="control-group">
+   <div class="controls">
+     <a href="#" id="J_Change_Avatar" style="position: relative;" class="btn" onclick="return false;">选择图片
+     <span style="position: absolute; left: 0px; top: 0px;"><em id="avatar"></em></span></a>
+     <input id="J_avatar" type="hidden" name="avatar" value=<%= infor.avatar %> >
+   </div>
+ </div>
+ <div class="control-group">
+   <div class="controls">
+     <input type="submit" class="btn btn-warning" value="保存头像">
+   </div>
+ </div>
+</form>
+</div>
+<% include footer %>

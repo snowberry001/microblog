@@ -1,0 +1,46 @@
+<% include header %>
+<script src="/mods/validate.js"></script>
+<form id="signupForm" class="form-horizontal" method="post">
+  <fieldset>
+    <legend>用戶注册</legend>
+    <div class="control-group">
+      <label class="control-label" for="username">用戶名</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge" id="nickname" name="username" placeholder="请输入用户名" onkeyup="checkName(this.value)">
+	<strong id="username_msg"  style="color: red" value="" ></strong>
+	<p></p>
+        <p class="help-block">你的账户的名称，用于登录和显示。</p>
+	
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="email">邮箱</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge" id="email" name="email" placeholder="请输入邮箱" onkeyup="checkEmail(this.value)">
+	<strong id="email_msg"  style="color: red" value="" ></strong>
+	<p></p>
+        <p class="help-block">如果你忘记了密码，可以帮助你找回密码。</p>
+	
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="password">密码</label>
+      <div class="controls">
+        <input type="password" class="input-xlarge" id="pwd" name="password" placeholder="请输入密码" onkeyup="checkPwd(this.value)">
+	<strong id="password_msg"  style="color: red" value=""></strong>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="password-repeat">重复输入密码</label>
+      <div class="controls">
+        <input type="password" class="input-xlarge" id="password_repeat" name="password-repeat" placeholder="请再次输入密码" onkeyup="checkSame(this.value)">
+	<strong id="repeat_msg"  style="color: red" value=""></strong>
+      </div>
+    </div>
+    <div class="form-actions">
+      <input type="button" class="btn btn-primary" id="btn_register" style="cursor: pointer" value="注册">
+    </div>
+  </fieldset>
+</form>
+
+<% include footer %>

@@ -1,0 +1,30 @@
+<% include header %>
+<legend>搜素结果<small>（共为您找到<%= session.counts %>条结果）</small></legend>
+<% include posts %>
+<% if (session.counts == 0) { %>
+    <p> 不好意思，没有搜素到相关的内容哦亲...... </p>
+<% } %>
+<div class="pagination ">
+  <ul>
+    <% if(session.page == 1){ %>
+    <li class="disabled" id="prev"><a>上一页</a></li>
+    <% } else {%>
+    <li id="prev"><a href="?q=<%= session.key %>&p=<%= session.page-1 %>">上一页</a></li>
+    <% } %>
+
+    <% for (var index = 1; index <= session.pages; index ++){ %>
+    <% if (index == session.page){ %>
+    <li class="disabled" id="page<%= index %>"><a><%= index %></a></li>
+    <% } else { %>
+    <li id="page<%= index %>"><a href="?q=<%= session.key %>&p=<%= index %>"><%= index %></a></li>
+    <% }} %>
+    
+    <% if(session.page == session.pages){ %>
+    <li class="disabled" id="next"><a>下一页</a></li>
+    <% } else {%>
+    <li id="next"><a href="?q=<%= session.key %>&p=<%= session.page+1 %>">下一页</a></li>
+    <% } %>
+    
+  </ul>
+</div>
+<% include footer %>

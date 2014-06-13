@@ -1,0 +1,57 @@
+<% include header %>
+ <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="100480685" data-redirecturi="http://skysnow.aws.af.cm/callback" charset="utf-8"></script>
+ <script type="text/javascript" src="/mods/qqLogin.js"></script>
+<form class="form-horizontal" method="post">
+  <fieldset>
+    <legend>用戶登录</legend>
+   
+    <div class="control-group">
+      <label class="control-label" for="username">用戶名</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge" id="username" name="username" placeholder="请输入用户名">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="password">密码</label>
+      <div class="controls">
+        <input type="password" class="input-xlarge" id="password" name="password" placeholder="请输入密码">
+	<% if (session.error){ %>
+	<strong id="error_msg"  style="color: red"> &nbsp <%= flash('error') %>  </strong>
+	<% } %>
+	<p></p>
+	<p class="help-block"><a href="/reg">   没有账号？立即注册</a><small>&nbsp &nbsp &nbsp &nbsp</small><a href="/findpwd">找回密码 </a></p>
+      </div>
+    </div>
+    
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">登录 </button> &nbsp <span id="qqLoginButton"></span> &nbsp <a href="https://graph.qq.com/oauth2.0/authorize?client_id=100480685&response_type=token&scope=all&redirect_uri=http://skysnow.aws.af.cm/callback"><img src="/img/qqLogin.png" /></a>
+    <span id="wb_connect_btn"></span>
+    </div>
+    <wb:follow-button uid="2620203321" type="red_4" ></wb:follow-button>
+   <a id="wb_card_alone" wb_screen_name="skye翼" href="#" >skye翼</a>
+  </fieldset>
+</form>
+<script>
+
+WB2.anyWhere(function(W){
+    W.widget.hoverCard({
+        id : "wb_card_alone",
+	search: true
+    });
+});
+
+WB2.anyWhere(function(W){
+    W.widget.connectButton({
+        id: "wb_connect_btn",	
+        type:"3,3",
+        callback : {
+            login:function(o){
+		alert(o.screen_name);
+	    },	
+            logout:function(){
+            }
+        }
+    });
+});
+</script>
+<% include footer %>

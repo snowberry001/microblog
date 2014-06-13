@@ -1,0 +1,81 @@
+﻿<% include header %>
+<style type="text/css">
+p {white-space: pre;}
+.index_photo{float: left; }
+.lyric{
+	padding: 5px;
+	padding-right: 60px;
+	width:92%;
+	height: 500px;
+	background: RGB(220,220,220);
+	margin-top:0px;
+	border: 1px solid black;	
+}
+</style>
+<% if(!session.user) {  %>
+<div class="lyric"><img class="index_photo" src="img/lee.jpg" />
+<p>                 我不会喜欢你
+
+                作词：徐誉庭 作曲：陈柏霖/王宏恩
+
+                演唱：陈柏霖
+
+                我想我应该应该不会爱你            连你的窃笑也像是鼓励
+
+                为了要努力 努力的不爱你           从早安後的早餐到晚餐後的晚安
+
+                所以我让自己那麽喜欢你            别笑了 别笑了　我不会喜欢你
+
+                这样你就不忍心和我分离
+
+                我想我讨厌﻿ 讨厌骄傲的你
+
+                也讨厌美好 美好的那个你
+
+                於是我要自己假装讨厌你
+
+                那麽你就舍不得离我而去
+
+                我必须说我真的不会喜欢你　
+
+                我不喜欢你占据我所有思绪</p>               
+</div>
+<% } else { %>
+<div id="myCarousel" class="carousel slide">
+	<ol class="carousel-indicators">
+	  <% for(var i=0; i<picArr.length; i++){ %>
+	   <% if(i==0){ %>
+		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+	  <% } else { %>
+		<li data-target="#myCarousel" data-slide-to=<%=i%> class=""></li>
+	  <% } %>
+	  <% } %>
+	</ol>
+	<div class="carousel-inner">
+	<% for(var i=0; i<picArr.length; i++){ %>
+	  <% if(i==0){ %>
+	  <div class="item active">
+	  <% } else { %>
+	  <div class="item">
+	  <% } %>
+	    <img src=<%= picArr[i].src %> style="width: 100%; height: 400px;" alt=<%= picArr[i].title %>>
+	    <div class="carousel-caption">
+	      <h4><%= picArr[i].title %></h4>
+	    </div>
+	  </div>
+	  <% } %>
+	</div>
+	<a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+	<a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+</div>
+
+
+<% } %>
+<% include says %>
+<legend>最新博文</legend>
+<% include posts %>
+<% if (posts.length == 0) { %>
+    <p> 不好意思，最近博客比较冷清，没有新发布的微博哦...... </p>
+<% } %>
+<% include page %>
+<% include footer %>

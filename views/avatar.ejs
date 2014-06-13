@@ -1,0 +1,52 @@
+form(id='avatarUpload',class='form-horizontal',action='/set/upload',method='post')
+      legend 上传头像
+      div(class='control-group')
+        div(class='controls')
+          img(id="J_preview",src='#{user.BigavatarUrl}')
+      div(class='control-group')
+        div(class='controls')
+          a(href='#',id='J_Change_Avatar',class='btn',style='position:relative;') 选择图片
+            span(style='position:absolute;left:0px;top:0px;')
+              em(id='avatar') must support flashplayer
+          input(id='J_avatar',type='hidden',name='avatar',value='#{user.avatar}')
+      div(class='control-group')
+        div(class='controls')
+          button(class='btn btn-primary',type='submit') 上传
+
+<form id="avatarUpload" class="form-horizontal" action="/update/upload" method="post">
+ <div class="control-group">
+   <div class="controls">
+     <img id="J_preview" src="/img/jay.jpg" />
+   </div>
+ </div>
+ <div class="control-group">
+   <div class="controls">
+     <a href="#" id="J_Change_Avatar" style="position:relative;" class="btn">选择图片
+     <span style="position:absolute;left:0px;top:0px;"><em id="avatar"></em></span></a>
+   </div>
+ </div>
+ <div class="control-group">
+   <div class="controls">
+     <input type="submit" class="btn btn-warning" value="保存头像">
+   </div>
+ </div>
+</form>
+
+
+<form method="post" action="/update/upload" id="form_upload">
+<p><input type="button" class="btn btn-warning" id="btn_select"  value="选择文件" >
+<input type="submit" class="btn btn-warning" value="预览头像" style="margin-left: 40px;"></p>
+<p><input id="avatar_file" type="file" name="avatar_file" style="display: none"></p>
+</form>
+</div>
+
+<div style="padding-left: 100px;">
+<p>大头像：</p>
+<img src="/img/jay.jpg" class="img-polaroid" id="previewimg" name="previewimg"/>
+</div>
+
+<div style="padding-left: 100px; padding-top: 10px;">
+<p>小头像：</p>
+<img src="/img/jay.jpg" class="img-polaroid" style="width: 45px; height: 50px; margin-right: 70px;" />
+<input type="button" class="btn btn-warning" id="btn_upload"  value="保存头像" style="margin-top: 20px;">
+</div>

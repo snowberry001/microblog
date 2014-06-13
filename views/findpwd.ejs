@@ -1,0 +1,60 @@
+<% include header %>
+<script>
+function checkEmail(str) {
+	if (!str.match(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/))
+	{
+	     document.getElementById("email_msg").innerHTML = "邮箱格式不正确";
+	     return false;
+	}
+	else
+	{
+	     document.getElementById("email_msg").innerHTML = "";
+	     return true;
+	}
+};
+$(document).ready(function(){	
+	$("#btn_find").click(function(){
+	    var email = $("#email").val();
+		if (checkEmail(email))
+		{
+			$.post('/findpwd', {email: email}, function(data, status){
+				if (data.flag == 1)
+				{
+					return alert("系统繁忙,请稍后重试!");
+				}
+				if (data.flag == 2 )
+				{
+					return document.getElementById("email_msg").innerHTML = "您确定这是注册的邮箱吗？";
+				}
+				if (data.flag == 3)
+				{
+					return alert("密码已经发送至您的邮箱，请注意查收");
+				}
+			});
+		}
+		else
+		    return;
+	});
+});
+
+</script>
+<form class="form-horizontal" method="post">
+  <fieldset>
+    <legend>找回密码</legend>
+    <div class="control-group">
+      <label class="control-label" for="email">邮箱地址</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge" id="email" name="email" placeholder="请输入邮箱地址" onkeyup="checkEmail(this.value)">
+	<strong id="email_msg"  style="color: red" value="" ></strong>
+	<p></p>
+	<p class="help-block">输入注册时的邮箱，我们会将您的密码发送至您的邮箱，请注意查收</p>
+      </div>
+    </div>
+    
+    <div class="form-actions">
+      <button type="button" id="btn_find" class="btn btn-primary">找回密码</button>
+    </div>
+  </fieldset>
+</form>
+
+<% include footer %>

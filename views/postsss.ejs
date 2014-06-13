@@ -1,0 +1,90 @@
+<script src="/mods/like.js"></script>
+<style type="text/css">
+small {white-space: pre;}
+#form_reply{margin: 0px;}
+.commentlist .comment{
+       list-style:none;
+       border-bottom:1px solid #E2E2E2;
+       background:#FFF;
+       overflow:visible;
+       padding:5px;
+}
+</style>
+<% posts.forEach(function(post, index1) { %>
+<div class="row" >
+<div class="span10" >    
+     <big><a href="/u/<%= post.username %>"><%= post.username %></a></big>：<%= post.post %>   
+     <p></p>
+     <p><small><%= post.time %>    <a style="cursor:pointer" id="btn_comment"  onclick="$('#commentlist<%= index1 %>').slideToggle();"><img src="/img/comment.gif" /> 回复(<%= comment_num[post_ids[index1]] %>)</a></small><small>   |   </small><small><a style="cursor:pointer" class="ilike" id=<%= post_ids[index1] %> number=<%= like_num[post_ids[index1]] %> ><img src="/img/good.gif" /> 喜欢(<%= like_num[post_ids[index1]] %>)</a></small><small>   |   </small><small><a href="javascript:void(0)" onclick="$('#form_reply<%= index1 %>').slideToggle();">评论</a></small></p>  
+     <ol class="commentlist" id="commentlist<%= index1 %>" style="width: 550px; display: none" >
+     <% comments.forEach(function(comment, index) { %>
+     <%  if (comment.post_id == post_ids[index1]){ %>
+          <li class="comment clearfix" onmouseover="this.style.background = 'RGB(240,240,240)';" onmouseout="this.style.background = 'white';">
+	  <div class="reply-content" >
+	  <div class="text">
+	  <p style="white-space: pre-line"><a href="/u/<%= comment.username %>"><%= comment.username %></a> ：<%= comment.content %></p>
+          <p><small><%= comment.time %>&nbsp &nbsp &nbsp &nbsp<a style="cursor:pointer"  >回复</a></small></p>
+	  </div>
+	  </div></li>
+     <% }}) %>
+     </ol>
+
+     <form id="form_reply<%= index1 %>" style="text-align: center; display: none" action="/reply" method="post">
+          
+	  
+	  <div class="wmd-panel" >
+          <div id="wmd-button-bar-<%= index1 %>" background="/pagedown/wmd-buttons.png"></div>
+          <textarea class="wmd-input" id="wmd-input-<%= index1 %>"></textarea>
+          </div>
+          <div id="wmd-preview-<%= index1 %>" class="wmd-panel wmd-preview" ></div>
+
+	  <input type="text" class="span4" name="post_id" value=<%= post_ids[index1] %> style="display: none" >
+          <button type="submit" class="btn btn-success" id="reply" style="float: left; margin-top: 5px;">回复</button>
+     </form>
+
+</div>
+</div>
+<hr></hr>
+<% }) %>
+
+
+<script type="text/javascript" src="/pagedown/Markdown.Converter.js"></script>
+<script type="text/javascript" src="/pagedown/Markdown.Sanitizer.js"></script>
+<script type="text/javascript" src="/pagedown/Markdown.Editor.js"></script>
+<script type="text/javascript">
+(function () {  
+               var converter2 = new Markdown.Converter();
+
+                converter2.hooks.chain("preConversion", function (text) {
+                    return text.replace(/\b(a\w*)/gi, "*$1*");
+                });
+
+                converter2.hooks.chain("plainLinkText", function (url) {
+                    return "This is a link to " + url.replace(/^https?:\/\//, "");
+                });
+                
+                var help = function () { alert("Do you need help?"); }
+                
+                var editor2 = new Markdown.Editor(converter2, "-0");
+                
+                editor2.run();
+		
+                
+               
+})();
+
+//        KindEditor.ready(function(K) {
+//	        var editors = $('textarea[name="reply"]');
+//		for (var index = 0; index < editors.length; index ++){
+//                   var editor_id = editors[index].id;
+//		   K.create('#'+editor_id, {width: '550px', minWidth: '550px', items: 
+//		      [
+//			'preview', '|', 'emoticons', 'bold', 'italic', 'forecolor', 'hilitecolor', '|', 'source', 'clearhtml', '|',
+//			'image', 'code', 'insertorderedlist', 'insertunorderedlist', 'link', '|', 'selectall', 'undo', 'redo', '|', 
+//                      ]
+//		   });
+//		}
+//	});
+</script>
+
+

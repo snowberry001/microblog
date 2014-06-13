@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 TRANSITIONAL//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+ <head>
+  <title><%= title %></title>
+  <link rel="icon" href="/img/favicon.ico" />
+  <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" charset="utf-8" data-callback="true"></script>
+  <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="100480685" data-redirecturi="http://skysnow.aws.af.cm/callback" charset="utf-8"></script>
+ </head>
+ <body>
+  <strong><big>浏览器努力跳转中。。。</big></strong><input type="button" value=" 获取 " onclick="getInfor();">
+ </body>
+
+<script type="text/javascript">
+function getInfor(){
+var paras = {};
+QC.api("get_user_info", paras)
+	.success(function(s){
+		alert("获取用户信息成功！当前用户昵称为："+s.data.nickname);
+		$.post('/qqsave', {username: s.data.nickname}, function(data, status){
+			if(data.flag == 1){
+				window.location.href = '\';
+			}
+		});
+	})
+	.error(function(f){
+		alert("获取用户信息失败！");
+	})
+	.complete(function(c){
+		alert("获取用户信息完成！");
+	});
+	}
+</script>
+</html>

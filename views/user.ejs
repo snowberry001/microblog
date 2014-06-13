@@ -1,0 +1,34 @@
+﻿<% include header %>
+<div id="ring" style="widht:0px; height:0px;">
+<embed id="ring" src='/sound/One More Chance.mp3' loop="true" autostart="true" hidden="true" style="height:0px; width:0px;0px;"></embed>
+</div>
+<link href="/stylesheets/user.css" rel="stylesheet" type="text/css" />
+<div id="user_infor" class="user">
+<% if(infor.avatar){ %>
+<a href="/u/<%= session.user %>"><img id="user_photo" src=<%= infor.avatar %> class="img-polaroid"/></a>
+<% } else { %>
+<a href="/u/<%= session.user %>"><img id="user_photo" src="/img/default.jpg" class="img-polaroid"/></a>
+<% } %>
+<% if (infor.nickname) { %>
+<h1 id="user_name"><%= infor.nickname %></h1>
+<% } else {%>
+<h1 id="user_name">用户(<%= session.user %>)</h1>
+<% } %>
+<% if (infor.sign) { %>
+<p id="user_sign">个性签名：<%= infor.sign %></p>
+<% } else {%>
+<p id="user_sign">个性签名：你还没有编辑个性签名哦...</p>
+<% } %>			 				
+</div>
+<% if(session.myself) { %>
+<% include says %>
+<legend>我的博文</legend>
+<% } else { %>
+<legend>他的博文</legend>
+<% } %>
+<% include posts %>
+<% if (posts.length == 0) { %>
+    <p> 博主比较懒，最近没有发布微博哦...... </p>
+<% } %>
+<% include page %>
+<% include footer %>

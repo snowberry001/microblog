@@ -1,0 +1,23 @@
+
+
+<form id="form_reply<%= index1 %>" style="text-align: center; display: none" action="/reply" method="post">
+<textarea id="editor<%= index1 %>" name="post" style="width:700px;height:300px;"></textarea>
+<form>
+<script src="/pagedown/Markdown.Converter.js"></script>
+<script src="/javascripts/showdown.js"></script>
+<script src="/pagedown/Markdown.Editor.js"></script>
+<script charset="utf-8" src="/editor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/editor/lang/zh_CN.js"></script>
+<script>
+    var editor;
+    KindEditor.ready(function(K) {
+            editor = K.create('#editor_id');
+    });
+</script>
+
+
+<form method="post" action="/reply" class="span5 well form-inline " style="text-align: center; display: none" id="form_reply<%= index1 %>">
+     <input type="text" class="span4" name="reply" placeholder="评论..." id="comment">
+     <input type="text" class="span4" name="post_id" value=<%= post_ids[index1] %> style="display: none" >
+     <button type="submit" class="btn btn-success" id="reply">回复</button>
+     </form>

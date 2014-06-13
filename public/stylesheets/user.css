@@ -1,0 +1,29 @@
+
+.user{
+	padding: 5px;
+	height:180px;
+	width:98%;
+	background: white;
+	margin-top:0px;
+	border: 2px solid #f6eef5;
+}
+#user_photo{
+	height:170px;
+	width:170px;
+	float:left;
+}
+#user_name{
+	margin-left:10px;
+	color:#270c23;
+	font-size:27px;
+	float:left;
+	width:600px;
+}
+#user_sign{
+	margin-left:10px;
+	color:#555;
+	font-size:14px;
+	width:600px;
+	height:120px;
+	float:left;
+}
