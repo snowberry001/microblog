@@ -1,4 +1,4 @@
 microblog
 =========
 
-NodeJs 博客
+Node.Js + Express + MongoDB搭建的多人博客
